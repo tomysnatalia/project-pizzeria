@@ -93,6 +93,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordin() {
@@ -188,36 +189,41 @@
 
 
           /* START IF: if option is selected and option is not default */
-          if(optionSelected && !option.default) {
-             /* add price of option to variable price */
-             let optionPrice = option.price;
-             console.log(optionPrice);
+          if (optionSelected && !option.default) {
+            let optionPrice = option.price;
+            console.log(optionPrice);
 
-             price = price + optionPrice;
+            /* add price of option to variable price */
+            price = price + optionPrice;
 
             /* END IF: if option is selected and option is not default */
           } else if (!optionSelected && option.default) { /* START ELSE IF: if option is not selected and option is default */
             let optionPrice = option.price;
-            price = price - optionPrice;
 
+            /* deduct price of option from price */
+            price = price - optionPrice;
           }
 
-          /* deduct price of option from price */
+          if (optionSelected) {
+            let productImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+            console.log(productImages);
+            for (let productImage of productImages) {
+              productImage.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } else {
+            let productImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+            for (let productImage of productImages) {
+              productImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         }
-        /* END ELSE IF: if option is not selected and option is default */
       }
-      /* END LOOP: for each optionId in param.options */
-
-      /* END LOOP: for each paramId in thisProduct.data.params */
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       const finalPrice = thisProduct.priceElem.innerHTML = price;
       console.log(finalPrice);
     }
   }
-
-
-
 
 
   const app = {
