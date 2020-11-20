@@ -345,7 +345,7 @@
       const thisWidget = this;
 
       const event = new CustomEvent('updated', {
-        bubbles:true
+        bubbles: true
       });
 
       thisWidget.element.dispatchEvent(event);
@@ -397,12 +397,13 @@
         }
       });
 
-      thisCart.dom.productList.addEventListener('updated', function() {
+      thisCart.dom.productList.addEventListener('updated', function () {
         thisCart.update();
       });
 
-      thisCart.dom.productList.addEventListener('remove', function() {
-        thisCart.remove();
+      thisCart.dom.productList.addEventListener('remove', function (event) {
+        event.preventDefault();
+        thisCart.remove(event.detail.cartProduct);
       });
     }
 
@@ -452,7 +453,7 @@
       console.log(thisCart.totalPrice);
 
       for (let key of thisCart.renderTotalsKeys) {
-        for (let elem of thisCart.dom[key]){
+        for (let elem of thisCart.dom[key]) {
           elem.innerHTML = thisCart[key];
         }
       }
@@ -464,10 +465,8 @@
       const index = thisCart.products.indexOf(cartProduct);
       console.log(index);
 
-      thisCart.products.splice(index);
-
-      const domProduct = thisCart.dom.productList;
-      domProduct.remove();
+      thisCart.products.splice(index, 1);
+      cartProduct.dom.wrapper.remove();
 
       thisCart.update();
     }
@@ -488,9 +487,6 @@
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
       thisCartProduct.initActions();
-
-
-
     }
 
     getElements(element) {
@@ -522,8 +518,8 @@
     remove() {
       const thisCartProduct = this;
 
-      const event = new CustomEvent ('remove', {
-        bubbles:true,
+      const event = new CustomEvent('remove', {
+        bubbles: true,
         detail: {
           cartProduct: thisCartProduct,
         },
@@ -538,13 +534,13 @@
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
 
-      thisCartProduct.dom.edit.addEventListener('click', function(event) {
+      thisCartProduct.dom.edit.addEventListener('click', function (event) {
         event.preventDefault();
       });
 
-      thisCartProduct.dom.remove.addEventListener('click', function(event) {
-       event.preventDefault();
-       thisCartProduct.remove();
+      thisCartProduct.dom.remove.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisCartProduct.remove();
       });
 
     }
