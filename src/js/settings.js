@@ -31,7 +31,6 @@ export const select = {
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
     },
-
     datePicker: {
       wrapper: '.date-picker',
       input: `input[name="date"]`,

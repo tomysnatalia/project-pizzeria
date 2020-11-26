@@ -30,7 +30,7 @@ const app = {
         return rawRespnse.json();
       })
       .then(function (parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
+        // console.log('parsedResponse', parsedResponse);
 
         /* sava parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
@@ -59,7 +59,7 @@ const app = {
     const thisApp = this;
 
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
-    console.log(thisApp.pages);
+    // console.log(thisApp.pages);
 
     thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
     // thisApp.activatePage(thisApp.pages[0].id);
@@ -113,7 +113,7 @@ const app = {
     const thisApp = this;
 
     thisApp.booking = document.querySelector(select.containerOf.booking);
-    console.log(thisApp.booking);
+    // console.log(thisApp.booking);
 
     const booking =  new Booking(thisApp.booking);
 
