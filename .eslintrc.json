@@ -35,6 +35,7 @@
     ]
   },
   "globals": {
-    "flatpickr": true
+    "flatpickr": true,
+    "range-slider": true
   }
 }

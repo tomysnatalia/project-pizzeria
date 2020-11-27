@@ -42,7 +42,7 @@ export class DatePicker extends BaseWidget {
   }
 
   parseValue(newValue) {
-    return parseInt(newValue);
+    return (newValue);
   }
 
   isValid() {

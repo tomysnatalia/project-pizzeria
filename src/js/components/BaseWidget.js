@@ -19,8 +19,8 @@ export class BaseWidget {
   set value(assignedValue) {
     const thisWidget = this;
 
-    // const newValue = thisWidget.parseValue(assignedValue);
-    const newValue = assignedValue;
+    const newValue = thisWidget.parseValue(assignedValue);
+    // const newValue = assignedValue;
 
     if(newValue != thisWidget.correctValue && thisWidget.isValid(newValue)) {
       thisWidget.correctValue = newValue;
