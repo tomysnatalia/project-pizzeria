@@ -1,4 +1,4 @@
-import {templates, select, settings} from '../settings.js';
+import {classNames, templates, select, settings} from '../settings.js';
 import { AmountWidget } from './AmountWidget.js';
 import {DatePicker} from './DatePicker.js';
 import {HourPicker} from './HourPicker.js';
@@ -33,6 +33,8 @@ export class Booking {
     thisBooking.dom.datePicker =  booking.querySelector(select.widgets.datePicker.wrapper);
 
     thisBooking.dom.hourPicker = booking.querySelector(select.widgets.hourPicker.wrapper);
+
+    thisBooking.dom.tables = booking.querySelectorAll(select.booking.tables);
   }
 
   initWidgets() {
@@ -45,6 +47,12 @@ export class Booking {
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
 
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+
+    thisBooking.dom.wrapper.addEventListener('updated', function(event) {
+      event.preventDefault();
+      thisBooking.updateDOM();
+    });
+
   }
 
   getData() {
@@ -97,7 +105,6 @@ export class Booking {
     thisBooking.booked = {};
 
     for (const reservation of eventsCurrent) {
-      console.log(reservation);
       thisBooking.makeBooked(
         reservation.date,
         reservation.hour,
@@ -106,7 +113,6 @@ export class Booking {
     }
 
     for (const reservation of bookings) {
-      console.log(reservation);
       thisBooking.makeBooked(
         reservation.date,
         reservation.hour,
@@ -125,6 +131,7 @@ export class Booking {
           reservation.table);
       }
     }
+    thisBooking.updateDOM();
   }
 
   makeBooked(date, hour, duration, table) {
@@ -141,9 +148,27 @@ export class Booking {
       }
       thisBooking.booked[date][hourNumber + i].push(table);
     }
-
     console.log(thisBooking.booked);
   }
 
+  updateDOM() {
+    const thisBooking = this;
 
+    thisBooking.date = thisBooking.datePicker.value;
+    thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+    const bookedTables = thisBooking.booked[thisBooking.date][thisBooking.hour];
+
+    for (let table of thisBooking.dom.tables) {
+      const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+      if (
+        thisBooking.booked.hasOwnProperty(thisBooking.date) &&
+        thisBooking.booked[thisBooking.date].hasOwnProperty(thisBooking.hour) &&
+        bookedTables.includes(parseInt(tableNumber))
+      ) {
+        table.classList.add(classNames.booking.tableBooked);
+      } else {
+        table.classList.remove(classNames.booking.tableBooked);
+      }
+    }
+  }
 }
