@@ -109,7 +109,7 @@ const app = {
 
   },
 
-  initBooking: function () {
+  initBooking() {
     const thisApp = this;
 
     thisApp.booking = document.querySelector(select.containerOf.booking);
