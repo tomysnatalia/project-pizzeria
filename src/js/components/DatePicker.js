@@ -7,9 +7,7 @@ export class DatePicker extends BaseWidget {
     super(wrapper, utils.dateToStr(new Date()));
     const thisWidget = this;
 
-    console.log(thisWidget);
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
-
 
     thisWidget.initPlugin();
   }
@@ -19,6 +17,7 @@ export class DatePicker extends BaseWidget {
 
     thisWidget.minDate = new Date(thisWidget.value);
     thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
+    const allTables = document.querySelectorAll(select.booking.tables);
 
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
@@ -37,6 +36,9 @@ export class DatePicker extends BaseWidget {
         const date = utils.addDays(dateStr[0], 1);
         thisWidget.value = utils.dateToStr(date);
         console.log(thisWidget.value);
+        for (const eachTable of allTables) {
+          eachTable.classList.remove('active');
+        }
       }
     });
   }

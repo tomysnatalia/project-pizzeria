@@ -67,7 +67,6 @@ utils.dateToStr = function(dateObj){
 };
 
 utils.addDays = function(dateStr, days){
-  console.log(dateStr);
   const dateObj = new Date(dateStr);
   dateObj.setDate(dateObj.getDate() + days);
   return dateObj;

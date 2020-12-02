@@ -2,6 +2,7 @@ import {BaseWidget} from './BaseWidget.js';
 import {settings, select} from '../settings.js';
 import {utils} from '../utils.js';
 
+
 export class HourPicker  extends BaseWidget {
   constructor(wrapper) {
     super(wrapper, settings.hours.open);
@@ -16,12 +17,16 @@ export class HourPicker  extends BaseWidget {
 
   initPlugin() {
     const thisWidget = this;
-
     // eslint-disable-next-line no-undef
     rangeSlider.create(thisWidget.dom.input);
 
+    const allTables = document.querySelectorAll(select.booking.tables);
+
     thisWidget.dom.input.addEventListener('input', function(){
       thisWidget.value = thisWidget.dom.input.value;
+      for (const eachTable of allTables) {
+        eachTable.classList.remove('active');
+      }
     });
 
   }
