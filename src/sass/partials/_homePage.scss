@@ -1,0 +1,91 @@
+/* homePage */
+.content {
+  height: auto;
+  width: 700px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 60px 35px;
+}
+
+.header {
+  margin-bottom: 50px;
+}
+
+.row {
+  margin-bottom: 10px;
+  display: flex;
+  max-height: 125px;
+}
+
+.forwarding {
+  max-height: 125px;
+}
+
+.forwarding_order {
+  padding: 0;
+}
+
+.forwarding_booking {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+.forwarding img {
+  max-height: 125px;
+  width: 100%;
+  object-fit: none;
+}
+
+.forwarding a {
+  position: absolute;
+  color: white;
+  display: flex;
+  font-size: 25px;
+  z-index: 2;
+  font-family: "Oswald", sans-serif;
+  text-decoration: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.opening_hours {
+  background-color: #ff6b6b;
+  max-height: 125px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "Oswald", sans-serif;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.gallery.row {
+  max-height: 150px;
+  display: flex;
+}
+
+.gallery img {
+  max-height: 150px;
+  margin-bottom: 10px;
+  display: flex;
+  width: 100%;
+}
+
+.col-lg-4 {
+  display: flex;
+}
