@@ -33,3 +33,15 @@
     font-style: italic;
   }
 }
+
+.homepage a {
+  color: #ffffff;
+  font-size: 15px;
+  font-family: $font-header;
+  text-decoration: none;
+  list-style: none;
+}
+
+.homepage {
+  margin-bottom: 30px;
+}
