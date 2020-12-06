@@ -1,8 +1,9 @@
-import {classNames, templates, select, settings} from '../settings.js';
+/* eslint-disable no-prototype-builtins */
+import { classNames, templates, select, settings } from '../settings.js';
 import { AmountWidget } from './AmountWidget.js';
-import {DatePicker} from './DatePicker.js';
-import {HourPicker} from './HourPicker.js';
-import {utils} from '../utils.js';
+import { DatePicker } from './DatePicker.js';
+import { HourPicker } from './HourPicker.js';
+import { utils } from '../utils.js';
 
 export class Booking {
   constructor(booking) {
@@ -10,21 +11,17 @@ export class Booking {
 
     thisBooking.booking = booking;
 
-
     thisBooking.render(booking);
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.initActions();
     thisBooking.chooseTable();
-
-
-
   }
 
   initActions() {
     const thisBooking = this;
     const buttonDiv = document.querySelector(select.booking.bookingButton);
-    buttonDiv.addEventListener('click', function(event) {
+    buttonDiv.addEventListener('click', function (event) {
       event.preventDefault();
       thisBooking.addBooking();
       thisBooking.getData();
@@ -44,20 +41,27 @@ export class Booking {
 
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
 
-    thisBooking.dom.peopleAmount = booking.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.peopleAmount = booking.querySelector(
+      select.booking.peopleAmount
+    );
 
-    thisBooking.dom.hoursAmount = booking.querySelector(select.booking.hoursAmount);
+    thisBooking.dom.hoursAmount = booking.querySelector(
+      select.booking.hoursAmount
+    );
 
-    thisBooking.dom.datePicker =  booking.querySelector(select.widgets.datePicker.wrapper);
+    thisBooking.dom.datePicker = booking.querySelector(
+      select.widgets.datePicker.wrapper
+    );
 
-    thisBooking.dom.hourPicker = booking.querySelector(select.widgets.hourPicker.wrapper);
+    thisBooking.dom.hourPicker = booking.querySelector(
+      select.widgets.hourPicker.wrapper
+    );
 
     thisBooking.dom.tables = booking.querySelectorAll(select.booking.tables);
-
   }
 
   initWidgets() {
-    const thisBooking =  this;
+    const thisBooking = this;
 
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
 
@@ -67,35 +71,43 @@ export class Booking {
 
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-    thisBooking.dom.wrapper.addEventListener('updated', function(event) {
+    thisBooking.dom.wrapper.addEventListener('updated', function (event) {
       event.preventDefault();
       thisBooking.updateDOM();
     });
-
   }
 
   getData() {
     const thisBooking = this;
 
     const startEndDates = {};
-    startEndDates[settings.db.dateStartParamKey] = utils.dateToStr(thisBooking.datePicker.minDate);
-    startEndDates[settings.db.dateEndParamKey] = utils.dateToStr(thisBooking.datePicker.maxDate);
+    startEndDates[settings.db.dateStartParamKey] = utils.dateToStr(
+      thisBooking.datePicker.minDate
+    );
+    startEndDates[settings.db.dateEndParamKey] = utils.dateToStr(
+      thisBooking.datePicker.maxDate
+    );
 
     const endDate = {};
-    endDate[settings.db.dateEndParamKey] = startEndDates[settings.db.dateEndParamKey];
+    endDate[settings.db.dateEndParamKey] =
+      startEndDates[settings.db.dateEndParamKey];
 
     const params = {
       booking: utils.queryParams(startEndDates),
-      eventsCurrent: settings.db.notRepeatParam + '&' + utils.queryParams(startEndDates),
+      eventsCurrent:
+        settings.db.notRepeatParam + '&' + utils.queryParams(startEndDates),
       eventsRepeat: settings.db.repeatParam + '&' + utils.queryParams(endDate),
     };
 
     // console.log('getData params', params);
 
     const urls = {
-      booking: settings.db.url + '/' + settings.db.booking + '?' + params.booking,
-      eventsCurrent: settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent,
-      eventsRepeat: settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat,
+      booking:
+        settings.db.url + '/' + settings.db.booking + '?' + params.booking,
+      eventsCurrent:
+        settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent,
+      eventsRepeat:
+        settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat,
     };
 
     // console.log('getData urls', urls);
@@ -105,16 +117,19 @@ export class Booking {
       fetch(urls.eventsCurrent),
       fetch(urls.eventsRepeat),
     ])
-      .then(function([bookingsResponse, eventsCurrentResponse, eventsRepeatResponse]){
+      .then(function ([
+        bookingsResponse,
+        eventsCurrentResponse,
+        eventsRepeatResponse,
+      ]) {
         return Promise.all([
           bookingsResponse.json(),
           eventsCurrentResponse.json(),
           eventsRepeatResponse.json(),
         ]);
       })
-      .then(function([bookings, eventsCurrent, eventsRepeat]){
+      .then(function ([bookings, eventsCurrent, eventsRepeat]) {
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
-
       });
   }
 
@@ -128,7 +143,8 @@ export class Booking {
         reservation.date,
         reservation.hour,
         reservation.duration,
-        reservation.table);
+        reservation.table
+      );
     }
 
     for (const reservation of bookings) {
@@ -136,7 +152,8 @@ export class Booking {
         reservation.date,
         reservation.hour,
         reservation.duration,
-        reservation.table);
+        reservation.table
+      );
     }
 
     for (const reservation of eventsRepeat) {
@@ -147,7 +164,8 @@ export class Booking {
           newDateStr,
           reservation.hour,
           reservation.duration,
-          reservation.table);
+          reservation.table
+        );
       }
     }
     thisBooking.updateDOM();
@@ -199,7 +217,7 @@ export class Booking {
     for (const table of allTables) {
       console.log(table.classList);
 
-      table.addEventListener('click', function() {
+      table.addEventListener('click', function () {
         const clickedElement = this;
         console.log(clickedElement);
         if (!table.classList.contains('booked')) {
@@ -208,7 +226,9 @@ export class Booking {
           }
           clickedElement.classList.add('active');
 
-          const resultElement = clickedElement.getAttribute(settings.booking.tableIdAttribute);
+          const resultElement = clickedElement.getAttribute(
+            settings.booking.tableIdAttribute
+          );
           thisBooking.table = parseInt(resultElement);
 
           console.log(resultElement);
@@ -225,8 +245,8 @@ export class Booking {
 
     const startersArray = [];
 
-    for(let starter of starters) {
-      if(starter.checked == true) {
+    for (let starter of starters) {
+      if (starter.checked == true) {
         const value = starter.getAttribute('value');
         startersArray.push(value);
         console.log(startersArray);
@@ -254,14 +274,11 @@ export class Booking {
     };
 
     fetch(url, options)
-      .then(function(response){
+      .then(function (response) {
         return response.json();
-      }).then(function(parsedResponse){
+      })
+      .then(function (parsedResponse) {
         console.log('parsedResponse', parsedResponse);
       });
-
   }
-
-
-
 }

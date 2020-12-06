@@ -1,6 +1,7 @@
-import {select, classNames, templates} from '../settings.js';
-import {utils} from '../utils.js';
-import {AmountWidget} from './AmountWidget.js';
+/* eslint-disable no-prototype-builtins */
+import { select, classNames, templates } from '../settings.js';
+import { utils } from '../utils.js';
+import { AmountWidget } from './AmountWidget.js';
 
 export class Product {
   constructor(id, data) {
@@ -32,19 +33,32 @@ export class Product {
 
     /* add element to menu */
     menuContainer.appendChild(thisProduct.element);
-
   }
 
   getElements() {
     const thisProduct = this;
 
-    thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-    thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-    thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-    thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-    thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-    thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-    thisProduct.amountWidgetelem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+    thisProduct.accordionTrigger = thisProduct.element.querySelector(
+      select.menuProduct.clickable
+    );
+    thisProduct.form = thisProduct.element.querySelector(
+      select.menuProduct.form
+    );
+    thisProduct.formInputs = thisProduct.form.querySelectorAll(
+      select.all.formInputs
+    );
+    thisProduct.cartButton = thisProduct.element.querySelector(
+      select.menuProduct.cartButton
+    );
+    thisProduct.priceElem = thisProduct.element.querySelector(
+      select.menuProduct.priceElem
+    );
+    thisProduct.imageWrapper = thisProduct.element.querySelector(
+      select.menuProduct.imageWrapper
+    );
+    thisProduct.amountWidgetelem = thisProduct.element.querySelector(
+      select.menuProduct.amountWidget
+    );
   }
 
   initAccordin() {
@@ -56,7 +70,6 @@ export class Product {
 
     /* START: click event listener to trigger */
     thisProduct.accordionTrigger.addEventListener('click', function (event) {
-
       /* prevent default action for event */
       event.preventDefault();
 
@@ -73,13 +86,10 @@ export class Product {
 
         /* START: if the active product isn't the element of thisProduct */
         if (activeProduct != thisProduct.element) {
-
           /* remove class active for the active product */
           activeProduct.classList.remove('active');
-
         } /* END: if the active product isn't the element of this Product */
-
-      }  /* END LOOP: for each active product */
+      } /* END LOOP: for each active product */
     });
     /* END: click event listener to trigger */
   }
@@ -105,7 +115,6 @@ export class Product {
       thisProduct.addToCart();
       // thisProduct.element.children = thisProduct.data.element.children;
     });
-
   }
 
   processOrder() {
@@ -125,8 +134,6 @@ export class Product {
     let price = thisProduct.data.price;
     // console.log(price);
 
-
-
     /* START LOOP: for each paramId in thisProduct.data.params */
     /* save the element in thisProduct.data.params with key paramId as const param */
     for (let paramId in allParams) {
@@ -139,9 +146,10 @@ export class Product {
         const option = param.options[optionId];
         // console.log(option);
 
-        const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+        const optionSelected =
+          formData.hasOwnProperty(paramId) &&
+          formData[paramId].indexOf(optionId) > -1;
         // console.log(optionSelected);
-
 
         /* START IF: if option is selected and option is not default */
         if (optionSelected && !option.default) {
@@ -152,7 +160,8 @@ export class Product {
           price = price + optionPrice;
 
           /* END IF: if option is selected and option is not default */
-        } else if (!optionSelected && option.default) { /* START ELSE IF: if option is not selected and option is default */
+        } else if (!optionSelected && option.default) {
+          /* START ELSE IF: if option is not selected and option is default */
           let optionPrice = option.price;
 
           /* deduct price of option from price */
@@ -160,12 +169,14 @@ export class Product {
         }
 
         if (optionSelected) {
-          let productImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          let productImages = thisProduct.imageWrapper.querySelectorAll(
+            '.' + paramId + '-' + optionId
+          );
           // console.log(productImages);
           if (!thisProduct.params[paramId]) {
             thisProduct.params[paramId] = {
               label: param.label,
-              options: {}
+              options: {},
             };
           }
           thisProduct.params[paramId].options[optionId] = option.label;
@@ -173,7 +184,9 @@ export class Product {
             productImage.classList.add(classNames.menuProduct.imageVisible);
           }
         } else {
-          let productImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          let productImages = thisProduct.imageWrapper.querySelectorAll(
+            '.' + paramId + '-' + optionId
+          );
           for (let productImage of productImages) {
             productImage.classList.remove(classNames.menuProduct.imageVisible);
           }
@@ -184,7 +197,8 @@ export class Product {
     /* multiplay price by amount */
     // price *= thisProduct.amountWidget.value;
     thisProduct.priceSingle = price;
-    thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
+    thisProduct.price =
+      thisProduct.priceSingle * thisProduct.amountWidget.value;
 
     /* set the contents of thisProduct.priceElem to be the value of variable price */
     // const finalPrice = thisProduct.priceElem.innerHTML = price;
