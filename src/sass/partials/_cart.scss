@@ -4,12 +4,13 @@
   right: 0;
   top: $base-size;
   padding: ($base-size) ($base-size * 1.5);
-  background: $color-light;
+  background: $color-blue;
   border-radius: $radius;
   color: $color-main;
   font-size: $base-size;
   box-shadow: 0 0 $base-size rgba(0, 0, 0, 0.2);
   z-index: 9999;
+  border: 2px solid $color-main;
 
   &.active {
     .cart__content {
@@ -29,25 +30,29 @@
     font-size: ($base-size * 2);
   }
 
+  i {
+    font-size: 20px;
+  }
+
   &__total-number {
     background: $color-main;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    color: $color-light;
+    color: #ffff;
     text-align: center;
     line-height: 28px;
   }
 
   &__total-price {
-    color: $color-dark;
+    color: #ffff;
   }
 
   &__content {
     @include accordion-closed();
     opacity: 0;
     animation: flipdown 0.5s ease both;
-    color: $color-dark;
+    color: #ffff;
   }
 
   &__order-summary {

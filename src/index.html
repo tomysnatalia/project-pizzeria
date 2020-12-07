@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext"
     rel="stylesheet">
@@ -18,29 +19,82 @@
   <header class="header">
     <div class="container">
       <div class="header__wrapper">
-        <div class="logo">
-          <h1 class="logo__title"><span>Mamma</span>Mia!</h1>
-          <h2 class="logo__subtitle">the best homemade Italian food</h2>
+        <div class="row">
+          <div class="logo col-lg-9">
+            <h1 class="logo__title"><span>Ciao</span>italia!</h1>
+            <h2 class="logo__subtitle"> Pizza. Pasta. Good times. </h2>
+          </div>
+          <div class="col-lg-3"></div>
         </div>
       </div>
+      <div class="row">
+        <div class="forwarding btn-homePage col-lg-4">
+          <a href="main.html#/order">ORDER ONLINE</a>
+          <p> Delivered to your door </p>
+        </div>
+
+        <div class="forwarding btn-homePage col-lg-4">
+          <a href="main.html#/booking">BOOK A TABLE </a>
+          <p> View availability </p>
+
+        </div>
+        <div class="forwarding btn-homePage col-lg-4">
+          <a href="#"> MENU </a>
+          <p> View availability </p>
+
+        </div>
+      </div>
+    </div>
     </div>
   </header>
 
   <div class="box">
     <section class="navigator">
       <div class="container">
-        <div class="row">
-          <div class="forwarding forwarding_order col-lg-6">
-            <a href="main.html#/order">ORDER ONLINE</a>
-            <p> Delicious food delivered to your door </p>
-            <img src="https://i.postimg.cc/R0g2FCXY/pizza-1.jpg" alt="image">
-          </div>
-          <div class="forwarding forwarding_booking col-lg-6">
-            <a href="main.html#/booking">BOOK A TABLE </a>
-            <p> View availability </p>
-            <img src="https://i.postimg.cc/gk35hHg8/pizza-2.jpg" alt="image">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+
+          <div class="carousel-inner promotions" role="listbox">
+            <div class="item active">
+              <div class="carousel-picture picture-promotions">
+                <img src="https://i.postimg.cc/Pqp7H3f8/pexels-maurijn-pach-546945.jpg" alt="image">
+              </div>
+              <div class="carousel-caption">
+                <h3> Look for our new lunch menu! </h3>
+                <p> - 3 courses - 14,99$ -
+                </p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="carousel-picture picture-promotions">
+                <img src="https://i.postimg.cc/qBmNfz9C/pexels-kristina-paukshtite-1146760.jpg" alt="image">
+              </div>
+              <div class="carousel-caption ">
+                <h3> The top of our menu! </h3>
+                <p> - Pizza Parma -
+                </p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="carousel-picture picture-promotions">
+                <img src="https://i.postimg.cc/c6yyq7ZS/pexels-jeswin-thomas-1628419.jpg" alt="image">
+              </div>
+              <div class="carousel-caption">
+                <h3> Book now for Christmas time </h3>
+                <p> - Collect moments not things -
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+
+
         <div class="row">
           <div class="opening_hours col-lg-12">
             <h1 class="title"> OPENING HOURS: </h1>
@@ -62,7 +116,7 @@
           <div class="carousel-inner" role="listbox">
             <div class="item active">
               <div class="carousel-picture">
-                <img src="https://i.postimg.cc/WzkyXGTR/pizza-3.jpg" alt="image">
+                <img src="https://i.postimg.cc/x1HjdR1B/pexels-tomateoignons-3820638.jpg" alt="image">
               </div>
               <div class="carousel-caption">
                 <h3> AMAZING SERVICE! </h3>
@@ -78,7 +132,7 @@
 
             <div class="item">
               <div class="carousel-picture">
-                <img src="https://i.postimg.cc/DfJRvTsC/pizza-4.jpg" alt="image">
+                <img src="https://i.postimg.cc/JhSRSzVj/pexels-dana-tentis-726000.jpg" alt="image">
               </div>
               <div class="carousel-caption">
                 <h3> BEST TIME WITH MY FAMILY! </h3>
@@ -94,7 +148,7 @@
 
             <div class="item">
               <div class="carousel-picture">
-                <img src="https://i.postimg.cc/W3tCJRy1/pizza-5.jpg" alt="image">
+                <img src="https://i.postimg.cc/Jz6rcQp6/pexels-rene-asmussen-3217157.jpg" alt="image">
               </div>
               <div class="carousel-caption">
                 <h3> GREAT STAFF! </h3>
@@ -119,21 +173,21 @@
             <a href="#"><i class="fas fa-heart"></i></a>
             <a href="#"><i class="fas fa-code-branch"></i></a>
             <div class="overlay">
-              <img src="https://i.postimg.cc/DfJRvTsC/pizza-4.jpg" alt="image">
+              <img src="https://i.postimg.cc/Hn7DPZqz/pexels-kaboompics-com-6267.jpg" alt="image">
             </div>
           </div>
           <div class="picture picture_middle col-lg-4 col-sm-4">
             <a href="#"><i class="fas fa-heart"></i></a>
             <a href="#"><i class="fas fa-code-branch"></i></a>
             <div class="overlay">
-              <img src="https://i.postimg.cc/W3tCJRy1/pizza-5.jpg" alt="image">
+              <img src="https://i.postimg.cc/mkyRc3cS/pexels-askar-abayev-5638838.jpg" alt="image">
             </div>
           </div>
           <div class="picture picture_right col-lg-4 col-sm-4">
             <a href="#"><i class="fas fa-heart"></i></a>
             <a href="#"><i class="fas fa-code-branch"></i></a>
             <div class="overlay">
-              <img src="https://i.postimg.cc/DZDDrjVd/pizza-6.jpg" alt="image">
+              <img src="https://i.postimg.cc/WzvTbY43/pexels-matheus-gomes-2433978.jpg" alt="image">
             </div>
           </div>
         </div>
@@ -142,14 +196,14 @@
             <a href="#"><i class="fas fa-heart"></i></a>
             <a href="#"><i class="fas fa-code-branch"></i></a>
             <div class="overlay">
-              <img src="https://i.postimg.cc/N0sWB27T/pizza-7.jpg" alt="image">
+              <img src="https://i.postimg.cc/Ssct2nMS/pexels-jonathan-borba-3009323.jpg" alt="image">
             </div>
           </div>
           <div class="picture picture_middle col-lg-4 col-sm-4">
             <a href="#"><i class="fas fa-heart"></i></a>
             <a href="#"><i class="fas fa-code-branch"></i></a>
             <div class="overlay">
-              <img src="https://i.postimg.cc/3rsVWcF3/pizza-8.jpg" alt="image">
+              <img src="https://i.postimg.cc/wB16WsP6/pexels-lucio-panerai-3908197.jpg" alt="image">
             </div>
           </div>
           <div class="picture picture_right col-lg-4 col-sm-4">
@@ -166,6 +220,16 @@
       </div>
     </section>
   </div>
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="terms">
+        <a href="terms.html">
+          <p> Terms & Conditions <i class="fab fa-readme"></i>
+        </a></p>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

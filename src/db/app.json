@@ -255,7 +255,7 @@
       "date": "2019-01-01",
       "hour": "18:00",
       "table": 2,
-      "repeat": false,
+      "repeat": "weekly",
       "duration": 2,
       "ppl": 3,
       "starters": [

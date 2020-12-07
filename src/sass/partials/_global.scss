@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  background: lighten($color-dark, 75%);
+  background: #dcdde1;
   font-family: $font-text;
   font-size: 14px;
   line-height: 1.7;
@@ -16,5 +16,24 @@ body {
   max-width: 700px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.terms {
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    color: #22a6b3;
+  }
+
+  p {
+    text-decoration: none;
+  }
+
+
+  .fa-readme {
+    margin-left: 10px;
+    font-size: 15px;
+  }
 }
 

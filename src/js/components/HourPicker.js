@@ -1,15 +1,18 @@
-import {BaseWidget} from './BaseWidget.js';
-import {settings, select} from '../settings.js';
-import {utils} from '../utils.js';
+import { BaseWidget } from './BaseWidget.js';
+import { settings, select } from '../settings.js';
+import { utils } from '../utils.js';
 
-
-export class HourPicker  extends BaseWidget {
+export class HourPicker extends BaseWidget {
   constructor(wrapper) {
     super(wrapper, settings.hours.open);
     const thisWidget = this;
 
-    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.input);
-    thisWidget.dom.output = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.output);
+    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(
+      select.widgets.hourPicker.input
+    );
+    thisWidget.dom.output = thisWidget.dom.wrapper.querySelector(
+      select.widgets.hourPicker.output
+    );
 
     thisWidget.initPlugin();
     thisWidget.value = thisWidget.dom.input.value;
@@ -22,13 +25,12 @@ export class HourPicker  extends BaseWidget {
 
     const allTables = document.querySelectorAll(select.booking.tables);
 
-    thisWidget.dom.input.addEventListener('input', function(){
+    thisWidget.dom.input.addEventListener('input', function () {
       thisWidget.value = thisWidget.dom.input.value;
       for (const eachTable of allTables) {
         eachTable.classList.remove('active');
       }
     });
-
   }
 
   parseValue(newValue) {
@@ -44,6 +46,4 @@ export class HourPicker  extends BaseWidget {
 
     thisWidget.dom.output.innerHTML = thisWidget.value;
   }
-
-
 }

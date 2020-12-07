@@ -96,10 +96,11 @@ export class Booking {
       booking: utils.queryParams(startEndDates),
       eventsCurrent:
         settings.db.notRepeatParam + '&' + utils.queryParams(startEndDates),
-      eventsRepeat: settings.db.repeatParam + '&' + utils.queryParams(endDate),
+      eventsRepeat:
+        settings.db.repeatDailyParam + '&' + utils.queryParams(endDate),
     };
 
-    // console.log('getData params', params);
+    console.log(utils.queryParams(startEndDates));
 
     const urls = {
       booking:
@@ -157,7 +158,7 @@ export class Booking {
     }
 
     for (const reservation of eventsRepeat) {
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 21; i++) {
         const newDate = utils.addDays(reservation.date, i);
         const newDateStr = utils.dateToStr(newDate);
         thisBooking.makeBooked(
@@ -215,8 +216,6 @@ export class Booking {
     const allTables = thisBooking.dom.tables;
 
     for (const table of allTables) {
-      console.log(table.classList);
-
       table.addEventListener('click', function () {
         const clickedElement = this;
         console.log(clickedElement);
@@ -241,9 +240,12 @@ export class Booking {
     const thisBooking = this;
 
     const starters = document.querySelectorAll('input[name=starter]');
-    console.log(starters);
+    const birthday = document.querySelectorAll('input[name=birthday]');
+    const kidsmenu = document.querySelectorAll('input[name=kidsmenu]');
 
     const startersArray = [];
+    const birthdayArray = [];
+    const kidsmenuArray = [];
 
     for (let starter of starters) {
       if (starter.checked == true) {
@@ -253,17 +255,47 @@ export class Booking {
       }
     }
 
+    for (let tick of birthday) {
+      if (tick.checked == true) {
+        const value = tick.getAttribute('value');
+        birthdayArray.push(value);
+      }
+    }
+
+    for (let tick of kidsmenu) {
+      if (tick.checked == true) {
+        const value = tick.getAttribute('value');
+        kidsmenuArray.push(value);
+      }
+    }
+
+    thisBooking.name = document.querySelector(select.booking.name);
+    thisBooking.phoneNumber = document.querySelector(
+      select.booking.phoneNumber
+    );
+    thisBooking.emailAddress = document.querySelector(
+      select.booking.emailAddress
+    );
+
     const url = settings.db.url + '/' + settings.db.booking;
     console.log(url);
 
     const payload = {
+      name: thisBooking.name.value,
+      phone: thisBooking.phoneNumber.value,
+      mail: thisBooking.emailAddress.value,
       date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
       table: thisBooking.table,
       ppl: thisBooking.peopleAmount.value,
       duration: thisBooking.hoursAmount.value,
       starters: startersArray,
+      birthday: birthdayArray,
+      kidsmenu: kidsmenuArray,
     };
+
+    console.log(thisBooking.emailAddress.value);
+    console.log(thisBooking.phoneNumber.value);
 
     const options = {
       method: 'POST',

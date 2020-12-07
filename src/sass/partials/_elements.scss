@@ -8,6 +8,10 @@
   @include btn($color-main, $color-light, $color-main);
 }
 
+.btn-homePage {
+  @include btn($color-main, $color-light, $color-main);
+}
+
 .btn-quantity {
   @include btn($color-dark, $color-light, $color-dark);
   vertical-align: top;
@@ -34,6 +38,7 @@ input, select {
   border: 1px solid $color-dark;
   border-radius: $radius;
   padding: $base-size;
+  width: 160px;
 
   // CODE ADDED START
   &.error {

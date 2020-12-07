@@ -1,5 +1,6 @@
-import {settings, select} from '../settings.js';
-import {BaseWidget} from './BaseWidget.js';
+/* eslint-disable no-import-assign */
+import { settings, select } from '../settings.js';
+import { BaseWidget } from './BaseWidget.js';
 
 export class AmountWidget extends BaseWidget {
   constructor(wrapper) {
@@ -15,13 +16,23 @@ export class AmountWidget extends BaseWidget {
   getElements() {
     const thisWidget = this;
 
-    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
-    thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
-    thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
+    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(
+      select.widgets.amount.input
+    );
+    thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(
+      select.widgets.amount.linkDecrease
+    );
+    thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(
+      select.widgets.amount.linkIncrease
+    );
   }
 
   isValid(newValue) {
-    return !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax;
+    return (
+      !isNaN(newValue) &&
+      newValue >= settings.amountWidget.defaultMin &&
+      newValue <= settings.amountWidget.defaultMax
+    );
   }
 
   initActions() {
@@ -32,12 +43,11 @@ export class AmountWidget extends BaseWidget {
     });
 
     thisWidget.dom.linkDecrease.addEventListener('click', function () {
-      thisWidget.value = thisWidget.value -1;
+      thisWidget.value = thisWidget.value - 1;
     });
 
     thisWidget.dom.linkIncrease.addEventListener('click', function () {
-      thisWidget.value = thisWidget.value +1;
-
+      thisWidget.value = thisWidget.value + 1;
     });
   }
 

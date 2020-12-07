@@ -46,7 +46,8 @@ export const select = {
     productList: '.cart__order-summary',
     toggleTrigger: '.cart__summary',
     totalNumber: `.cart__total-number`,
-    totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+    totalPrice:
+      '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
     subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
     deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
     form: '.cart__order',
@@ -65,6 +66,9 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     bookingButton: '.order-confirmation button',
+    name: '[name="name"]',
+    phoneNumber: '[name="phoneNumber"]',
+    emailAddress: '[name="mail"]',
   },
   nav: {
     links: '.main-nav a',
@@ -102,7 +106,7 @@ export const settings = {
     defaultMax: 9,
   },
   datePicker: {
-    maxDaysInFuture: 14,
+    maxDaysInFuture: 21,
   },
   cart: {
     defaultDeliveryFee: 20,
@@ -119,12 +123,19 @@ export const settings = {
     dateStartParamKey: 'date_gte',
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
-    repeatParam: 'repeat_ne=false',
+    repeatDailyParam: 'repeat=daily',
+    repeatWeeklyParam: 'repeat=weekly',
   },
 };
 
 export const templates = {
-  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-  cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+  menuProduct: Handlebars.compile(
+    document.querySelector(select.templateOf.menuProduct).innerHTML
+  ),
+  cartProduct: Handlebars.compile(
+    document.querySelector(select.templateOf.cartProduct).innerHTML
+  ),
+  bookingWidget: Handlebars.compile(
+    document.querySelector(select.templateOf.bookingWidget).innerHTML
+  ),
 };

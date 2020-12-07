@@ -1,10 +1,11 @@
 .header {
   padding: ($base-size * 5) 0 ($base-size * 8) 0;
-  background: $color-dark;
+  background: #353b48;
   color: $color-light;
 
   &__wrapper {
     position: relative;
+    margin-bottom: 42px;
   }
 
 }
@@ -29,7 +30,7 @@
   &__subtitle {
     margin: 0;
     font-size: ($base-size * 1.5);
-    font-weight: $font-light;
+
     font-style: italic;
   }
 }

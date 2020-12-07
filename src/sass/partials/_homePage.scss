@@ -2,7 +2,78 @@
 
 /* header */
 .header {
-  margin-bottom: 50px;
+  padding-top: 60px;
+  padding-bottom: 6px;
+
+  .logo {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: ($base-size * 1.5);
+    font-family: 'Great Vibes', cursive;
+    font-style: italic;
+  }
+
+  .forwarding {
+    max-height: 125px;
+    background-color: $color-main;
+
+    &.btn-homePage {
+      height: 50px;
+      max-width: 220px;
+      margin-right: 8px;
+    }
+
+    a {
+      position: absolute;
+      color: white;
+      display: flex;
+      font-size: 16px;
+      z-index: 2;
+      font-family: "Oswald", sans-serif;
+      text-decoration: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: top 0.5s;
+    }
+
+    p {
+      position: absolute;
+      color: white;
+      display: flex;
+      font-size: 7px;
+      z-index: 2;
+      font-family: "Lato", sans-serif;
+      text-decoration: none;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: top 0.5s;
+      margin-top: 5px;
+    }
+
+    &.forwarding_order {
+      padding: 0;
+    }
+
+    &.forwarding_booking {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+
+    &.forwarding:hover a {
+      top: 35%;
+    }
+
+    &.forwarding:hover p {
+      opacity: 1;
+      top: 55%;
+    }
+  }
 }
 
 /* box */
@@ -20,68 +91,34 @@
   max-height: 125px;
 }
 
+.box {
+  margin-top: 50px;
+}
+
 /* navigator */
-.forwarding {
-  max-height: 125px;
+.promotions {
+  width: 620px;
+  margin-left: -15px;
+  margin-bottom: 30px;
 
   img {
-    border-radius: 2%;
-    max-height: 125px;
-    width: 100%;
-    object-fit: none;
+    height: 500px;
   }
 
-  a {
-    position: absolute;
-    color: white;
-    display: flex;
-    font-size: 25px;
-    z-index: 2;
-    font-family: "Oswald", sans-serif;
-    text-decoration: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: top 0.5s;
+  h3 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 62px;
   }
 
   p {
-    position: absolute;
-    color: white;
-    display: flex;
-    font-size: 9px;
-    z-index: 2;
-    font-family: "Lato", sans-serif;
-    text-decoration: none;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: top 0.5s;
-  }
-
-  &.forwarding_order {
-    padding: 0;
-  }
-
-  &.forwarding_booking {
-    padding-right: 0;
-    padding-left: 10px;
-  }
-
-  &.forwarding:hover a {
-    top: 35%;
-  }
-
-  &.forwarding:hover p {
-    opacity: 1;
-    top: 55%;
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
   }
 }
 
 .opening_hours {
   border-radius: 2%;
-  background-color: #ff6b6b;
+  background-color: #f9ca24;
   height: 125px;
 
   .title {
@@ -145,6 +182,7 @@
     h3 {
       font-size: 15px;
       margin-bottom: 18px;
+      color: #22a6b3;
     }
 
     h4 {
@@ -237,5 +275,5 @@
 
 .link a {
   padding: 5px;
-  color: #ff6b6b;
+  color: #22a6b3;
 }
