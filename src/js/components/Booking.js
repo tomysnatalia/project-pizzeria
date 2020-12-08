@@ -96,19 +96,33 @@ export class Booking {
       booking: utils.queryParams(startEndDates),
       eventsCurrent:
         settings.db.notRepeatParam + '&' + utils.queryParams(startEndDates),
-      eventsRepeat:
+      eventsDailyRepeat:
         settings.db.repeatDailyParam + '&' + utils.queryParams(endDate),
+      eventsWeeklyRepeat:
+        settings.db.repeatWeeklyParam + '&' + utils.queryParams(endDate),
     };
 
-    console.log(utils.queryParams(startEndDates));
+    console.log(
+      settings.db.repeatWeeklyParam + '&' + utils.queryParams(endDate)
+    );
 
     const urls = {
       booking:
         settings.db.url + '/' + settings.db.booking + '?' + params.booking,
       eventsCurrent:
         settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent,
-      eventsRepeat:
-        settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat,
+      eventsDailyRepeat:
+        settings.db.url +
+        '/' +
+        settings.db.event +
+        '?' +
+        params.eventsDailyRepeat,
+      eventsWeeklyRepeat:
+        settings.db.url +
+        '/' +
+        settings.db.event +
+        '?' +
+        params.eventsWeeklyRepeat,
     };
 
     // console.log('getData urls', urls);
@@ -116,25 +130,38 @@ export class Booking {
     Promise.all([
       fetch(urls.booking),
       fetch(urls.eventsCurrent),
-      fetch(urls.eventsRepeat),
+      fetch(urls.eventsDailyRepeat),
+      fetch(urls.eventsWeeklyRepeat),
     ])
       .then(function ([
         bookingsResponse,
         eventsCurrentResponse,
-        eventsRepeatResponse,
+        eventsDailyRepeatResponse,
+        eventsWeeklyRepeatResponse,
       ]) {
         return Promise.all([
           bookingsResponse.json(),
           eventsCurrentResponse.json(),
-          eventsRepeatResponse.json(),
+          eventsDailyRepeatResponse.json(),
+          eventsWeeklyRepeatResponse.json(),
         ]);
       })
-      .then(function ([bookings, eventsCurrent, eventsRepeat]) {
-        thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
+      .then(function ([
+        bookings,
+        eventsCurrent,
+        eventsDailyRepeat,
+        eventsWeeklyRepeat,
+      ]) {
+        thisBooking.parseData(
+          bookings,
+          eventsCurrent,
+          eventsDailyRepeat,
+          eventsWeeklyRepeat
+        );
       });
   }
 
-  parseData(bookings, eventsCurrent, eventsRepeat) {
+  parseData(bookings, eventsCurrent, eventsDailyRepeat, eventsWeeklyRepeat) {
     const thisBooking = this;
 
     thisBooking.booked = {};
@@ -157,10 +184,24 @@ export class Booking {
       );
     }
 
-    for (const reservation of eventsRepeat) {
+    for (const reservation of eventsDailyRepeat) {
       for (let i = 0; i < 21; i++) {
         const newDate = utils.addDays(reservation.date, i);
         const newDateStr = utils.dateToStr(newDate);
+        thisBooking.makeBooked(
+          newDateStr,
+          reservation.hour,
+          reservation.duration,
+          reservation.table
+        );
+      }
+    }
+
+    for (const reservation of eventsWeeklyRepeat) {
+      for (let i = 0; i < 3; i++) {
+        const newDate = utils.addDays(reservation.date, i * 7);
+        const newDateStr = utils.dateToStr(newDate);
+
         thisBooking.makeBooked(
           newDateStr,
           reservation.hour,
@@ -218,7 +259,7 @@ export class Booking {
     for (const table of allTables) {
       table.addEventListener('click', function () {
         const clickedElement = this;
-        console.log(clickedElement);
+        // console.log(clickedElement);
         if (!table.classList.contains('booked')) {
           for (const eachTable of allTables) {
             eachTable.classList.remove('active');
@@ -230,7 +271,7 @@ export class Booking {
           );
           thisBooking.table = parseInt(resultElement);
 
-          console.log(resultElement);
+          // console.log(resultElement);
         }
       });
     }
